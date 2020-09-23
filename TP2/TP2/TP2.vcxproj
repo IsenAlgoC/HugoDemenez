@@ -24,6 +24,7 @@
     <ProjectGuid>{6d8d0f7e-7d57-4e41-b309-057a3bc8257f}</ProjectGuid>
     <RootNamespace>TP2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>EXO1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
