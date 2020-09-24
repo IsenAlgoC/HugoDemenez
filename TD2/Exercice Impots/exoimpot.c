@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 main() {
 	// Calcul de l'impot en fonction du revenu net imposable
 	// déclaration de variables
@@ -49,4 +48,4 @@ main() {
 	}
 	// Affichage du montant de l'impôt
 
-	printf("\nle montant de votre impot pour un revenu net imposable de %d s'eleve a %d euros.\n", RNI, (int)impot);	return (EXIT_SUCCESS);}
+	printf("\nle montant de votre impot pour un revenu net imposable de %d s'eleve a %d euros.\n", RNI, (int)impot);	return (EXIT_SUCCESS);}
