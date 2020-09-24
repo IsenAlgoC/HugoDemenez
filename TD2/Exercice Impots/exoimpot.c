@@ -21,7 +21,9 @@ main() {
 	printf("\n Entrez votre revenu net imposable : ");
 	scanf_s("%d", &RNI);
 
-	revenuTmp = RNI;	// montant dans la tranche E
+	revenuTmp = RNI;
+	
+	// montant dans la tranche E
 
 	if (revenuTmp>TE) {
 		impot = (revenuTmp - TE) * TTE;
@@ -46,4 +48,5 @@ main() {
 		revenuTmp = TB;
 	}
 	// Affichage du montant de l'impôt
-	printf("\nle montant de votre impot pour un revenu net imposable de %d s'eleve a %d euros.", RNI, (int)impot);	return (EXIT_SUCCESS);}
+
+	printf("\nle montant de votre impot pour un revenu net imposable de %d s'eleve a %d euros.\n", RNI, (int)impot);	return (EXIT_SUCCESS);}
