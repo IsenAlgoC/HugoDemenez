@@ -4,17 +4,17 @@
 main() {
 	// Calcul de l'impot en fonction du revenu net imposable
 	// déclaration de variables
-	int TrancheBasse = 10065;
+	long long TrancheBasse = 10065;
 	double TauxTrancheBasse = 0.11;
-	int TrancheMoyenneBasse = 25660;
+	long long TrancheMoyenneBasse = 25660;
 	double TauxTrancheMoyenneBasse = 0.30;
-	int TrancheMoyenneHaute = 73370;
+	long long TrancheMoyenneHaute = 73370;
 	double TauxTrancheMoyenneHaute = 0.41;
-	int TrancheElevee = 157807;
+	long long TrancheElevee = 157807;
 	double TauxTrancheElevee = 0.45;
 	int RevenuNetImposable = 0; 
 	double impot = 0; // montant de l'impôt
-	int revenuTmp;
+	long long revenuTmp;
 
 	// saisie du revenu net imposable
 	printf("\n Entrez votre revenu net imposable : ");
