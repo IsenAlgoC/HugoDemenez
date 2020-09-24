@@ -33,7 +33,7 @@ main() {
 			impot = (revenuTmp - TrancheElevee) * TauxTrancheElevee;
 			revenuTmp = TrancheElevee;
 		}
-		// montant dans la tranche D
+		// montant dans la tranche moyenne haute
 
 		if (revenuTmp > TrancheMoyenneHaute) {
 			impot = impot + (revenuTmp - TrancheMoyenneHaute) * TauxTrancheMoyenneHaute;
