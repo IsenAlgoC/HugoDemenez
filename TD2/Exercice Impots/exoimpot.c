@@ -48,4 +48,4 @@ main() {
 	}
 	// Affichage du montant de l'impôt
 
-	printf("\nle montant de votre impot pour un revenu net imposable de %d s'eleve a %d euros.\n", RNI, (int)impot);	return (EXIT_SUCCESS);}
+	printf("\nle montant de votre impot pour un revenu net imposable de %d s'eleve a %d euros.\n", RevenuNetImposable, (int)impot);	return (EXIT_SUCCESS);}
