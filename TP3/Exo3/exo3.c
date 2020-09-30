@@ -23,7 +23,7 @@ int main() {
 	int nbvalide = 0;
 	int choix;
 	int nbabsent = 0;
-	int compteur = NBMAXNOTES;
+	int tailletableau = NBMAXNOTES;
 	int stop = 0;
 
 	//Debut de la saisie du tableau 
@@ -34,21 +34,37 @@ int main() {
 			scanf_s("%f", &note);
 			if (note > 20 || note < 0) {
 				printf("Vous avez entre une valeur invalide : Eleve (A)bsent ? Ou voulez-vous arreter la saisie des notes (O)ui / (N)on? ");
-				do { choix = _getch(); } while (choix != 'A' && choix != 'O' && choix != 'N');
+				//Si on entre une des touches demandées alors on effectue l'action associée
+				do { choix = _getch(); } while (choix != 'A' && choix != 'O' && choix != 'N'&& choix != 'a'&& choix != 'o'&& choix != 'n');
 				switch (choix) {
 				case 'A':
-					printf("\nABSENT!");
+					printf("\n");
+					//On remplace la mauvaise note par -1
+					note = -1;
+					break;
+				case 'a':
+					printf("\n");
 					//On remplace la mauvaise note par -1
 					note = -1;
 					break;
 				case 'O':
-					printf("On arrete");
+					printf("\n");
 					stop = 1;
-					compteur = num;
+					tailletableau = num;
+					num = NBMAXNOTES;
+					break;
+				case 'o':
+					printf("\n");
+					stop = 1;
+					tailletableau = num;
 					num = NBMAXNOTES;
 					break;
 				case'N':
-					printf("\nOK ON CONTINUE");
+					printf("\n");
+					num = num - 1;
+					break;
+				case'n':
+					printf("\n");
 					num = num - 1;
 					break;
 				}
@@ -60,7 +76,7 @@ int main() {
 		stop = 1;
 	}
 	//Parcours du tableau
-	for (int i = 1; i < compteur; i++) {
+	for (int i = 1; i < tailletableau; i++) {
 		if (tableau[i] != -1) {
 			//Calcul de moyenne
 			somme = somme + tableau[i];
@@ -83,7 +99,7 @@ int main() {
 	
 	moyenne = somme / nbvalide;
 
-	for (int i = 1; i < compteur; i++) {
+	for (int i = 1; i < tailletableau; i++) {
 		if (tableau[i] != -1) {
 			sommeecarttype = sommeecarttype + pow(((double)tableau[i] - moyenne), 2);
 		}
@@ -97,7 +113,13 @@ int main() {
 	printf("\nLa valeur moyenne est %f", moyenne);
 	printf("\nIl y a %d absents", nbabsent);
 	printf("\nIl y a un ecart-type de : %f", ecarttype);
-	
-	
+	printf("\nNoNote  Note");
+
+	for (int i = 1; i < tailletableau; i++) {
+		printf("\n%d       %f", i, tableau[i]);
+	}
+
+
 	return (EXIT_SUCCESS);
+
 }
