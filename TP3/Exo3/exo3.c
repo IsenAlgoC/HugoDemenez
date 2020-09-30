@@ -33,7 +33,7 @@ int main() {
 			printf("\nEntrez la note numero %d :", num);
 			scanf_s("%f", &note);
 			if (note > 20 || note < 0) {
-				printf("Eleve absent ? Ou voulez-vous arreter la saisie des notes ? A/O/N");
+				printf("Vous avez entre une valeur invalide : Eleve (A)bsent ? Ou voulez-vous arreter la saisie des notes (O)ui / (N)on? ");
 				do { choix = _getch(); } while (choix != 'A' && choix != 'O' && choix != 'N');
 				switch (choix) {
 				case 'A':
@@ -57,6 +57,7 @@ int main() {
 			//Insertion de la note dans le tableau
 			tableau[num] = note;
 		}
+		stop = 1;
 	}
 	//Parcours du tableau
 	for (int i = 1; i < compteur; i++) {
