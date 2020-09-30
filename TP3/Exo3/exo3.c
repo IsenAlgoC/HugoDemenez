@@ -11,7 +11,7 @@ int main() {
 
 		//FLOAT
 	float note;
-	float tableau[NBMAXNOTES];
+	float tableau[NBMAXNOTES+1];
 	float moyenne = 0;
 	float max = 0;
 	float mini = 20;
@@ -84,7 +84,7 @@ int main() {
 
 	for (int i = 1; i < compteur; i++) {
 		if (tableau[i] != -1) {
-			sommeecarttype = sommeecarttype + pow((tableau[i] - moyenne), 2);
+			sommeecarttype = sommeecarttype + pow(((double)tableau[i] - moyenne), 2);
 		}
 
 	}
@@ -95,7 +95,8 @@ int main() {
 	printf("\nLa valeur minimale est %f", mini);
 	printf("\nLa valeur moyenne est %f", moyenne);
 	printf("\nIl y a %d absents", nbabsent);
-	printf("\nIl y a un ecart-type de : %d", ecarttype);
+	printf("\nIl y a un ecart-type de : %f", ecarttype);
 	
 	
+	return (EXIT_SUCCESS);
 }
