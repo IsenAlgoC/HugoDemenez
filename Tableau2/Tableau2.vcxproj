@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{34cfe1f9-a3fe-4622-93b6-5a748a7b584e}</ProjectGuid>
-    <RootNamespace>Tableau</RootNamespace>
+    <ProjectGuid>{132df14e-1881-43bd-ade1-6daf1898fcf8}</ProjectGuid>
+    <RootNamespace>Tableau2</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="tableau.c" />
+    <ClCompile Include="tableau2.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

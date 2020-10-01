@@ -3,7 +3,7 @@
 
 int main() {
 	//Déclaration des variables
-	float tableau[100] = { 0.0 };
+	float tableau[100] = { 0 };
 	int ask = 1;
 	int position = 0;
 	float valeur=0;
@@ -23,7 +23,7 @@ int main() {
 		if (i % 10 == 0) {
 			printf("\n");
 		}
-		printf("%f ", tableau[i]);
+		printf("%.2f ", tableau[i]);
 	}
 
 	//Demande pour inserer une valeur 
@@ -40,7 +40,7 @@ int main() {
 		if (i % 10 == 0) {
 			printf("\n");
 		}
-		printf("%f ", tableau[i]);
+		printf("%.2f ", tableau[i]);
 	}
 
 	//Demande de suppression de valeur
@@ -55,7 +55,7 @@ int main() {
 		if (i % 10 == 0) {
 			printf("\n");
 		}
-		printf("%f ", tableau[i]);
+		printf("%.2f ", tableau[i]);
 	}
 
 	float somme = 0;
