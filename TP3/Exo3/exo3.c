@@ -115,7 +115,7 @@ int main() {
 	printf("\nIl y a un ecart-type de : %f", ecarttype);
 	printf("\nNoNote  Note");
 
-	for (int i = 1; i < tailletableau; i++) {
+	for (int i = 1; i <= tailletableau; i++) {
 		printf("\n%d       %f", i, tableau[i]);
 	}
 
