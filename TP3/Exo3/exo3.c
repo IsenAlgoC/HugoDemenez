@@ -106,7 +106,7 @@ int main() {
 
 	}
 
-	ecarttype = pow((sommeecarttype / (nbvalide - 1)), 0.5);
+	ecarttype = sqrt(sommeecarttype / (nbvalide - 1));
 
 	printf("\nLa valeur maximale est %f", max);
 	printf("\nLa valeur minimale est %f", mini);
