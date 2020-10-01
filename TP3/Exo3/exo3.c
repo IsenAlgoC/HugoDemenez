@@ -34,7 +34,7 @@ int main() {
 			scanf_s("%f", &note);
 			if (note > 20 || note < 0) {
 				printf("Vous avez entre une valeur invalide : Eleve (A)bsent ? Ou voulez-vous arreter la saisie des notes (O)ui / (N)on? ");
-				//Si on entre une des touches demandées alors on effectue l'action associée
+				//Si on entre une des touches demandÃ©es alors on effectue l'action associÃ©e
 				do { choix = _getch(); } while (choix != 'A' && choix != 'O' && choix != 'N'&& choix != 'a'&& choix != 'o'&& choix != 'n');
 				switch (choix) {
 				case 'A':
@@ -119,7 +119,7 @@ int main() {
 		printf("\n%d       %f", i, tableau[i]);
 	}
 
-
+	printf("Ok");
 	return (EXIT_SUCCESS);
 
 }
