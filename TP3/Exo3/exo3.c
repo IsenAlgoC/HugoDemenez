@@ -119,7 +119,7 @@ int main() {
 		printf("\n%d       %f", i, tableau[i]);
 	}
 
-	printf("Ok");
+	
 	return (EXIT_SUCCESS);
 
 }
