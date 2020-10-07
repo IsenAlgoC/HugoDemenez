@@ -12,15 +12,12 @@ int main() {
 	printf("Entrez une phrase : ");
 	gets_s(phrase, 1024);
 
-	for (int i = 1; i < 1024; i++) {
+	for (int i = 1; i < strlen(phrase); i++) {
 		if (phrase[i] == ' ') {
 			nbmot++;
 		}
 		else {
-			if (phrase[i] != -2) {
-				caracteres++;
-			}
-	
+			caracteres++;
 		}
 	}
 
