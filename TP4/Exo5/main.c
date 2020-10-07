@@ -2,8 +2,14 @@
 #include<conio.h>
 #include<stdlib.h>
 #include <string.h>
+#include <locale.h>
+
+
 
 int main() {
+	//Addition des caractères speciaux français
+	setlocale(LC_ALL, "fr-FR");
+
 	//Initialisation des variables
 	char phrase[1024] ;
 	int nbmots = 1;
@@ -27,5 +33,5 @@ int main() {
 
 	//Affichage des differentes valeurs
 	printf("\nIl y a %d mots dans votre phrase", nbmots);
-	printf("\nIl y a en moyenne %.4f caracteres dans vos mots ", caracteres / nbmots);
+	printf("\nIl y a en moyenne %.4f caractères dans vos mots ", caracteres / nbmots);
 }
