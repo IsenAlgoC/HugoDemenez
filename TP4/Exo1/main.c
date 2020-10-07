@@ -22,6 +22,7 @@ int main() {
 	//Calcul du nombre d'heure 
 	HeureFin.heure = HeureFin.heure + (HeureDebut.heure + Duree.heure) % 60;
 
+	//Affichage de l'heure de fin 
 	printf("L'heure de fin est %d:%d", HeureFin.heure, HeureFin.minute);
 }
 
