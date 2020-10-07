@@ -4,14 +4,18 @@
 #include <string.h>
 
 int main() {
+	//Initialisation des variables
 	char phrase[1024] ;
-	
 	int nbmot = 1;
 	float caracteres = 0.00;
 
+	
 	printf("Entrez une phrase : ");
+
+	//Debut de la séquence de frappe
 	gets_s(phrase, 1024);
 
+	//Calcul du nombre de mot et du nombre de caractères
 	for (int i = 1; i < strlen(phrase); i++) {
 		if (phrase[i] == ' ') {
 			nbmot++;
@@ -21,6 +25,7 @@ int main() {
 		}
 	}
 
+	//Affichage des differentes valeurs
 	printf("\nIl y a %d mots dans votre phrase", nbmot);
 	printf("\nIl y a en moyenne %.4f caracteres dans vos mots ", caracteres / nbmot);
 }
