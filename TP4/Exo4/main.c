@@ -19,7 +19,7 @@ int main() {
         if (mot[min++] != mot[max--])
         {
             printf("%s n'est pas un Palindrome", mot);
-            return;
+            return (EXIT_SUCCESS);
         }
     }
     printf("%s est palindrome", mot);

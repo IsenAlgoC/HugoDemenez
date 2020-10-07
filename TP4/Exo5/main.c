@@ -7,7 +7,7 @@
 
 
 int main() {
-	//Addition des caractères speciaux français
+	//Ajout des caractères speciaux français
 	setlocale(LC_ALL, "fr-FR");
 
 	//Initialisation des variables
