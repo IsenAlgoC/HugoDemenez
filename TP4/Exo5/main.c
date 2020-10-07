@@ -6,7 +6,7 @@
 int main() {
 	//Initialisation des variables
 	char phrase[1024] ;
-	int nbmot = 1;
+	int nbmots = 1;
 	float caracteres = 0.00;
 
 	
@@ -18,7 +18,7 @@ int main() {
 	//Calcul du nombre de mot et du nombre de caractères
 	for (int i = 1; i < strlen(phrase); i++) {
 		if (phrase[i] == ' ') {
-			nbmot++;
+			nbmots++;
 		}
 		else {
 			caracteres++;
@@ -26,6 +26,6 @@ int main() {
 	}
 
 	//Affichage des differentes valeurs
-	printf("\nIl y a %d mots dans votre phrase", nbmot);
-	printf("\nIl y a en moyenne %.4f caracteres dans vos mots ", caracteres / nbmot);
+	printf("\nIl y a %d mots dans votre phrase", nbmots);
+	printf("\nIl y a en moyenne %.4f caracteres dans vos mots ", caracteres / nbmots);
 }
