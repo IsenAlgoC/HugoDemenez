@@ -9,10 +9,8 @@ int main() {
 	setlocale(LC_ALL, "fr-FR");
 
 	//Initialisation des variables
-	int valeur=21;
+	int valeur;
 	int tableau[100];
-	int compteur = 0;
-	int positions[100];
 	int* Pointeur;
 
 	//Ajout du temps
