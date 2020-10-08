@@ -1,2 +1,2 @@
 #pragma once
-int somme(N);
+int somme(int N);
