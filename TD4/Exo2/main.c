@@ -12,8 +12,4 @@ int  main() {
 	int nbVal;
 	printf("Entrez le nombre de valeur que vous voulez entrer dans votre tableau :");
 	scanf_s("%d", &nbVal);
-
-	
-
-
 }
