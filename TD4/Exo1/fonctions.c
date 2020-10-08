@@ -4,8 +4,13 @@
 
 int somme(int N) {
 	int sum = 0;
-	for (int i = 0; i <= N; i++) {
-		sum = sum + i;
+	if (N < 0) {
+		return -1;
 	}
-	return sum;
+	else {
+		for (int i = 0; i <= N; i++) {
+			sum = sum + i;
+		}
+		return sum;
+	}
 }

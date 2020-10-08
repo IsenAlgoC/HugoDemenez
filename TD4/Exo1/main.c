@@ -4,7 +4,8 @@
 
 
 int main() {
-	int N = 10;
-
-	printf("%d", somme(N));
+	int valeur;
+	printf("Entrez une valeur :");
+	scanf_s("%d", &valeur);
+	printf("%d", somme(valeur));
 }
