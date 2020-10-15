@@ -6,15 +6,15 @@ int swap(int* A, int* B) {
 		return -1;
 	}
 	else {
-		int tmp = *A;
-		*A = *B;
-		*B = tmp;
+		int tmp = A;
+		A = B;
+		B = tmp;
 	}
 }
 
 
 int  ordonne(int* A, int* B) {
-	if (*A > * B) {
+	if (*A >  *B) {
 		swap(A, B);
 	}
 }
