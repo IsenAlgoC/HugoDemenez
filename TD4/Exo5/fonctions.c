@@ -1,6 +1,5 @@
 #include "Header.h"
 
-
 int swap(int* A, int* B) {
 	if (*A == NULL || *B == NULL) {
 		return -1;
