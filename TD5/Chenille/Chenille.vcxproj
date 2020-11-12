@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="ConsoleTools.c" />
     <ClCompile Include="demo.c" />
+    <ClCompile Include="fonctions.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleTools.h" />

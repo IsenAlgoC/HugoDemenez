@@ -22,13 +22,20 @@ int lissajous(COORD centre, double rayonX, double rayonY, double p, double q);
 #define sizemax 20
 #define sizeinit 5
 #define console 20
+#define FEUILLETAILLEX 40 // taille de la feuille
+#define FEUILLETAILLEY 30
+#define CHENILLETAILLEMAX 20 // taille max de la chenille
+#define CHENILLETAILLEINIT 5 // taille initiale de la chenille
 
 
 typedef struct CHENILLE {
 	int Size;
 	char Direction;
 	COORD tab[sizemax];
-};
+}Chenille;
 
 
-char feuille[SIZEX][SIZEY] = { ' ' };
+int DessineChenille(Chenille chenille);
+char selectDirection(Chenille chenille);
+void InitFeuille();
+int AvanceChenille(Chenille* chenille);
