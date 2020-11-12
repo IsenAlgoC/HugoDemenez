@@ -1,4 +1,10 @@
 #include <Windows.h>
+#include <locale.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
+#include "ConsoleTools.h"
+
 
 int clipping;
 int ellipse(COORD centre, double rayonX, double rayonY);
@@ -7,8 +13,8 @@ int lissajous(COORD centre, double rayonX, double rayonY, double p, double q);
 
 
 #define Pi 3.14159265358979
-#define FieldSizeX 40
-#define FieldSizeY 40
+#define SIZEX 40
+#define SIZEY 40
 #define body '\xDB'
 #define head 'O'
 #define Apple '@'
@@ -18,8 +24,11 @@ int lissajous(COORD centre, double rayonX, double rayonY, double p, double q);
 #define console 20
 
 
-typedef struct Chenille {
+typedef struct CHENILLE {
 	int Size;
 	char Direction;
 	COORD tab[sizemax];
 };
+
+
+char feuille[SIZEX][SIZEY] = { ' ' };
