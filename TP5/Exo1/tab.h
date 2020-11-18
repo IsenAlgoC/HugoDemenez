@@ -7,7 +7,7 @@
 //Déclaration des fonctions
 int initTab(int* tab, int size);
 int afficheTab(int* tab, int size, int nbElts);
-int ajoutElementDansTableau(int* tab, int *size, int *nbElts, int element);
+int *ajoutElementDansTableau(int* tab, int *size, int *nbElts, int element);
 
 //Déclaration des constantes
 #define TAB2SIZE 100

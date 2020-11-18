@@ -27,7 +27,7 @@ int afficheTab(int* tab, int size, int nbElts) {
 	return 0;
 }
 
-int ajoutElementDansTableau(int* tab, int *size, int *nbElts, int element) {
+int *ajoutElementDansTableau(int* tab, int *size, int *nbElts, int element) {
 	if (*nbElts == *size) {
 		//On crée un pointeur tableau temporaire étant la réallocation du pointeur tab sur la taille nécéssaire pour ajouter une valeur
 		int *tmp = (int*)realloc(tab, *size+TAILLEAJOUT);
