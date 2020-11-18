@@ -9,7 +9,7 @@ typedef struct Tableau {
 	int eltsCount; // le nombre d’éléments dans le tableau
 } TABLEAU;
 
-#define TAILLEINITIALE 100
+#define TAILLEINITIALE 10
 
 TABLEAU newArray();
 int incrementArraySize(TABLEAU* tab, int incrementValue);

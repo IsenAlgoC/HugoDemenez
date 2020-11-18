@@ -25,12 +25,12 @@ TABLEAU newArray() {
 
 int incrementArraySize(TABLEAU* tab, int incrementValue) {
 	//On regarde si la reallocation est possible : 
-	if ((int*)realloc(tab->elt, tab->size + incrementValue) == NULL) {
+	if ((int*)realloc(tab->elt, (tab->size + incrementValue) ) == NULL) {
 		return -1;
 	}
 	//On crée un pointeur tmp qui est une réallocation du pointeur elt dans tab
 	else {
-		int* tmp = (int*)realloc(tab->elt, tab->size + incrementValue);
+		int tmp = (int*)realloc(tab->elt, (tab->size + incrementValue));
 		tab->elt = tmp;
 		tab->size = tab->size + incrementValue;
 		return tab->size;
@@ -38,23 +38,33 @@ int incrementArraySize(TABLEAU* tab, int incrementValue) {
 }
 
 int setElement(TABLEAU* tab, int pos, int element) {
-	if (pos < tab->size) {
+	//On retourne 0 si on a une erreur
+	if (pos < 0) {
 		return 0;
 	}
-	//Alors on a donc (pos > tab->size) et il faut agrandir le tableau pour ajouter la valeur
+	//Si on se position à l'intérieur du tableau alors on met à element la position pos dans le tableau
+	if (0<pos && pos< tab->size) {
+		tab->elt[pos] = element;
+	}
+	//Sinon on a donc (pos > tab->size) et il faut agrandir le tableau pour ajouter la valeur
 	else {
 		incrementArraySize(tab, pos - (tab->size));
-		*(tab->elt + pos) = element;
+		tab->elt[pos-1] = element;
 	}
 	return pos;
 }
 
 int displayElements(TABLEAU* tab, int startPos, int endPos) {
+	//Si on a une erreur, on retourne -1
 	if (startPos > tab->size || endPos > tab->size || startPos < 0 || endPos < 0) {
 		return -1;
 	}
-	for (int i = startPos; i < endPos; i++) {
-		printf("%d", *(tab->elt + i));
+	//Autrement on affiche les valeurs à partir de startPos jusqu'à endPos
+	else {
+		for (int i = startPos; i < endPos; i++) {
+			printf_s("%d", *(tab->elt + i));
+		}
+		printf_s("\n");
 	}
 	return 0;
 }
