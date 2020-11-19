@@ -6,13 +6,13 @@ TABLEAU newArray() {
 	tmp.size = TAILLEINITIALE;
 	
 	//Si l'allocation est null on retourne un pointeur elt null
-	if ((int*)malloc(TAILLEINITIALE) == NULL) {
+	if ((int*)malloc(TAILLEINITIALE * sizeof(int)) == NULL) {
 		return tmp;
 	}
 
 	//Sinon on alloue la taille nécéssaire pour le pointeur elt de la structure tableau tmp et on initialise les valeurs de elt à 0 et eltsCount à 0
 	else {
-		tmp.elt = (int*)malloc(TAILLEINITIALE);
+		tmp.elt = (int*)malloc(TAILLEINITIALE*sizeof(int));
 		for (int i = 0; i < TAILLEINITIALE; i++) {
 			tmp.elt[i] = 0;
 		}
@@ -25,14 +25,13 @@ TABLEAU newArray() {
 
 int incrementArraySize(TABLEAU* tab, int incrementValue) {
 	//On regarde si la reallocation est possible : 
-	
-	if ((int*)realloc(tab->elt, (tab->size + incrementValue) ) == NULL) {
+	if ((int*)realloc(tab->elt, (tab->size + incrementValue) * sizeof(int)) == NULL) {
 		return -1;
 	}
 	//On crée un pointeur tmp qui est une réallocation du pointeur elt dans tab
 	else {
 		
-		int *tmp = (int*)realloc(tab->elt, (tab->size + incrementValue));
+		int tmp = (int*)realloc(tab->elt, (tab->size + incrementValue) * sizeof(int));
 		tab->elt = tmp;
 		tab->size = tab->size + incrementValue;
 		return tab->size;
@@ -44,9 +43,9 @@ int setElement(TABLEAU* tab, int pos, int element) {
 	if (pos < 0) {
 		return 0;
 	}
-	//Si on se position à l'intérieur du tableau alors on met à element la position pos dans le tableau
+	//Si on se position à l'intérieur du tableau alors on met à element la position pos-1 dans le tableau
 	if (0<pos && pos< tab->size) {
-		tab->elt[pos] = element;
+		tab->elt[pos-1] = element;
 	}
 	//Sinon on a donc (pos > tab->size) et il faut agrandir le tableau pour ajouter la valeur
 	else {
@@ -72,6 +71,23 @@ int displayElements(TABLEAU* tab, int startPos, int endPos) {
 }
 
 int deleteElements(TABLEAU* tab, int startPos, int endPos) {
+	if (tab == NULL || startPos>endPos || startPos<0 || endPos>tab->size) {
+		return -1;
+	}
 
-	return EXIT_SUCCESS;
+	else {
+		for (int i = startPos; i < endPos; i++) {
+			tab->elt[i] = NULL;
+		}
+		//On va décaler les termes à partir de endPos jusque startPos
+		for (int i = endPos; i < tab->size; i++) {
+			tab->elt[startPos + (i-endPos) -1 ] = tab->elt[i];
+		}
+		//On alloue une nouvelle taille plus petite
+		int tmp = (int*)realloc(tab->elt, (tab->size - (endPos - startPos)) * sizeof(int));
+		tab->elt = tmp; 
+		//On réduit size du tableau
+		tab->size = tab->size - (endPos - startPos + 1);
+	}
+	return tab->size;
 }

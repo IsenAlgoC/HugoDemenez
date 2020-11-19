@@ -7,7 +7,9 @@ int main() {
 	displayElements(&MonTableau, 0, 5);
 
 	setElement(&MonTableau, 5, 10);
-	incrementArraySize(&MonTableau, 2);
-	displayElements(&MonTableau, 0, TAILLEINITIALE);
-	
+	incrementArraySize(&MonTableau, 3);
+	setElement(&MonTableau, 10, 10);
+	displayElements(&MonTableau, 0, MonTableau.size);
+	deleteElements(&MonTableau, 2, 6);
+	displayElements(&MonTableau, 0, MonTableau.size);
 }
