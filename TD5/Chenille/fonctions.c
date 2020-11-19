@@ -81,6 +81,16 @@ int AvanceChenille(Chenille* chenille) {
 	switch (chenille->Direction) {
 	case 'H':
 		if (chenille->tab[0].Y > 0) {
+			//On verifie si on va manger une pomme
+			int posheadX = chenille->tab[chenille->Size - 1].X;
+			int posheadY = (chenille->tab[chenille->Size - 1].Y) - 1;
+			//Si on mange une pomme alors on augmente la taille de la chenille 
+			if (feuille[posheadX][posheadY] == '@') {
+				TailleAugmente(chenille);
+				chenille->tab[chenille->Size - 1].Y = posheadY;
+				chenille->tab[chenille->Size - 1].X = posheadX ;
+				return 0;
+			}
 			//On va supprimer dans la console le caractère de gauche de la chenille
 			int X = chenille->tab[0].X;
 			int Y = chenille->tab[0].Y;
@@ -92,14 +102,9 @@ int AvanceChenille(Chenille* chenille) {
 				chenille->tab[i].Y = (chenille->tab[i + 1].Y);
 			}
 			//Le dernier caractère de la chenille monte selon Y
-			chenille->tab[chenille->Size-1].Y=(chenille->tab[chenille->Size - 1].Y)+1;
-			//On verifie si on mange une pomme
-			int posheadX = chenille->tab[chenille->Size - 1].X;
-			int posheadY = chenille->tab[chenille->Size - 1].Y;
-			//Si on mange une pomme alors on augmente la taille de la chenille 
-			if (feuille[posheadX][posheadY] == '@') {
-				TailleAugmente(chenille);
-			}
+			chenille->tab[chenille->Size-1].Y=(chenille->tab[chenille->Size - 1].Y)-1;
+
+			
 			return 0;
 		}
 		else {
@@ -108,6 +113,16 @@ int AvanceChenille(Chenille* chenille) {
 			break;
 	case 'B':
 		if (chenille->tab[chenille->Size-1].Y < FEUILLETAILLEY) {
+			//On verifie si on va manger une pomme
+			int posheadX = chenille->tab[chenille->Size - 1].X;
+			int posheadY = (chenille->tab[chenille->Size - 1].Y) + 1;
+			//Si on mange une pomme alors on augmente la taille de la chenille 
+			if (feuille[posheadX][posheadY] == '@') {
+				TailleAugmente(chenille);
+				chenille->tab[chenille->Size - 1].Y = posheadY;
+				chenille->tab[chenille->Size - 1].X = posheadX;
+				return 0; 
+			}
 			//On efface le premier caractère à gauche de la chenille dans la console
 			int X = chenille->tab[0].X;
 			int Y = chenille->tab[0].Y;
@@ -120,13 +135,7 @@ int AvanceChenille(Chenille* chenille) {
 			}
 			//On descend le dernier caractère de la chenille selon Y
 			chenille->tab[chenille->Size-1].Y = (chenille->tab[chenille->Size-1].Y) + 1;
-			//On verifie si on mange une pomme
-			int posheadX = chenille->tab[chenille->Size - 1].X;
-			int posheadY = chenille->tab[chenille->Size - 1].Y;
-			//Si on mange une pomme alors on augmente la taille de la chenille 
-			if (feuille[posheadX][posheadY] == '@') {
-				TailleAugmente(chenille);
-			}
+			
 			return 0;
 		}
 		else {
@@ -135,6 +144,16 @@ int AvanceChenille(Chenille* chenille) {
 		break;
 	case 'G':
 		if (chenille->tab[0].X >0) {
+			//On verifie si on va mange rune pomme
+			int posheadX = (chenille->tab[0].X) - 1;
+			int posheadY = (chenille->tab[0].Y);
+			//Si on mange une pomme alors on augmente la taille de la chenille 
+			if (feuille[posheadX][posheadY] == '@') {
+				TailleAugmente(chenille);
+				chenille->tab[chenille->Size - 1].Y=posheadY;
+				chenille->tab[chenille->Size - 1].X = posheadX;
+				return 0;
+			}
 			//On supprime le dernier caractère de la chenille dans la console
 			int X = chenille->tab[chenille->Size-1].X;
 			int Y = chenille->tab[chenille->Size-1].Y;
@@ -147,13 +166,7 @@ int AvanceChenille(Chenille* chenille) {
 			}
 			//On décale le premier element vers la gauche selon les X
 			chenille->tab[0].X = (chenille->tab[0].X) - 1;
-			//On verifie si on mange une pomme
-			int posheadX = chenille->tab[chenille->Size - 1].X;
-			int posheadY = chenille->tab[chenille->Size - 1].Y;
-			//Si on mange une pomme alors on augmente la taille de la chenille 
-			if (feuille[posheadX][posheadY] == '@') {
-				TailleAugmente(chenille);
-			}
+			
 			return 0;
 		}
 		else {
@@ -162,6 +175,16 @@ int AvanceChenille(Chenille* chenille) {
 		break;
 	case 'D':
 		if (chenille->tab[chenille->Size-1].X < FEUILLETAILLEY) {
+			//On verifie si on va manger une pomme
+			int posheadX = (chenille->tab[chenille->Size - 1].X) + 1;
+			int posheadY = chenille->tab[chenille->Size - 1].Y;
+			//Si on mange une pomme alors on augmente la taille de la chenille 
+			if (feuille[posheadX][posheadY] == '@') {
+				TailleAugmente(chenille);
+				chenille->tab[chenille->Size - 1].X = posheadX;
+				chenille->tab[chenille->Size - 1].Y = posheadY;
+				return 0;
+			}
 			//On suprime le premier caractère à gauche de la chenille dans la console
 			int X = chenille->tab[0].X;
 			int Y = chenille->tab[0].Y;
@@ -174,13 +197,7 @@ int AvanceChenille(Chenille* chenille) {
 			}
 			//On décale le dernier element de la chenille vers la droite
 			chenille->tab[chenille->Size-1].X = (chenille->tab[chenille->Size-1].X) + 1;
-			//On verifie si on mange une pomme
-			int posheadX = chenille->tab[chenille->Size - 1].X;
-			int posheadY = chenille->tab[chenille->Size - 1].Y;
-			//Si on mange une pomme alors on augmente la taille de la chenille 
-			if (feuille[posheadX][posheadY] == '@') {
-				TailleAugmente(chenille);
-			}
+			
 			return 0;
 		}
 		else {
