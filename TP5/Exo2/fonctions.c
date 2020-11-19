@@ -12,7 +12,7 @@ TABLEAU newArray() {
 
 	//Sinon on alloue la taille nécéssaire pour le pointeur elt de la structure tableau tmp et on initialise les valeurs de elt à 0 et eltsCount à 0
 	else {
-		tmp.elt = (int*)malloc(TAILLEINITIALE*sizeof(int));
+		tmp.elt = (int*)malloc(TAILLEINITIALE);
 		for (int i = 0; i < TAILLEINITIALE; i++) {
 			tmp.elt[i] = 0;
 		}
@@ -25,12 +25,14 @@ TABLEAU newArray() {
 
 int incrementArraySize(TABLEAU* tab, int incrementValue) {
 	//On regarde si la reallocation est possible : 
+	
 	if ((int*)realloc(tab->elt, (tab->size + incrementValue) ) == NULL) {
 		return -1;
 	}
 	//On crée un pointeur tmp qui est une réallocation du pointeur elt dans tab
 	else {
-		int tmp = (int*)realloc(tab->elt, (tab->size + incrementValue));
+		
+		int *tmp = (int*)realloc(tab->elt, (tab->size + incrementValue));
 		tab->elt = tmp;
 		tab->size = tab->size + incrementValue;
 		return tab->size;
@@ -62,7 +64,7 @@ int displayElements(TABLEAU* tab, int startPos, int endPos) {
 	//Autrement on affiche les valeurs à partir de startPos jusqu'à endPos
 	else {
 		for (int i = startPos; i < endPos; i++) {
-			printf_s("%d", *(tab->elt + i));
+			printf_s("%d ", *(tab->elt + i));
 		}
 		printf_s("\n");
 	}

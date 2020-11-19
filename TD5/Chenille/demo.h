@@ -12,7 +12,7 @@
 #define FEUILLETAILLEX 20 // taille de la feuille
 #define FEUILLETAILLEY 20
 #define CHENILLETAILLEMAX 20 // taille max de la chenille
-#define CHENILLETAILLEINIT 5 // taille initiale de la chenille
+#define CHENILLETAILLEINIT 6 // taille initiale de la chenille
 
 typedef struct CHENILLE {
 	int Size;
