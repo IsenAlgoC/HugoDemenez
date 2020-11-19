@@ -8,8 +8,10 @@ int main() {
 
 	setElement(&MonTableau, 5, 10);
 	incrementArraySize(&MonTableau, 3);
-	setElement(&MonTableau, 10, 10);
+	setElement(&MonTableau, 10, 7);
 	displayElements(&MonTableau, 0, MonTableau.size);
+	setElement(&MonTableau, 7, 3);
 	deleteElements(&MonTableau, 2, 6);
+	
 	displayElements(&MonTableau, 0, MonTableau.size);
 }

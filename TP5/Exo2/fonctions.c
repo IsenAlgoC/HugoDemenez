@@ -76,12 +76,13 @@ int deleteElements(TABLEAU* tab, int startPos, int endPos) {
 	}
 
 	else {
-		for (int i = startPos; i < endPos; i++) {
-			tab->elt[i] = NULL;
-		}
 		//On va décaler les termes à partir de endPos jusque startPos
 		for (int i = endPos; i < tab->size; i++) {
 			tab->elt[startPos + (i-endPos) -1 ] = tab->elt[i];
+		}
+		//On supprime les élements qui ont été déplacés
+		for (int i = tab->size-endPos+1; i < tab->size; i++) {
+			tab->elt[i] = NULL;
 		}
 		//On alloue une nouvelle taille plus petite
 		int tmp = (int*)realloc(tab->elt, (tab->size - (endPos - startPos)) * sizeof(int));
