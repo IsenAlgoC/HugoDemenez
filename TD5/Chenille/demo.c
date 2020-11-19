@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 	InitChenille(&Chen);
 	DessineChenille(Chen);
 	while (Chen.Size != CHENILLETAILLEMAX) {
-		Sleep(1000);
+		Sleep(100);
 		AvanceChenille(&Chen);
 		DessineChenille(Chen);
 	}

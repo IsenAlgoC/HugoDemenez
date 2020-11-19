@@ -8,11 +8,9 @@
 
 #define Sleep(n) Sleep(n)
 
-#define SIZEX 40
-#define SIZEY 40
 #define console 20
-#define FEUILLETAILLEX 40 // taille de la feuille
-#define FEUILLETAILLEY 30
+#define FEUILLETAILLEX 20 // taille de la feuille
+#define FEUILLETAILLEY 20
 #define CHENILLETAILLEMAX 20 // taille max de la chenille
 #define CHENILLETAILLEINIT 5 // taille initiale de la chenille
 
@@ -22,8 +20,9 @@ typedef struct CHENILLE {
 	COORD tab[CHENILLETAILLEMAX];
 }Chenille;
 
-int DessineChenille(Chenille chenille);
-char selectDirection(Chenille *chenille);
+void DessineChenille(Chenille chenille);
+void selectDirection(Chenille *chenille);
 void InitFeuille();
 int AvanceChenille(Chenille* chenille);
 void InitChenille(Chenille* chenille);
+void TailleAugmente(Chenille* chenille);
