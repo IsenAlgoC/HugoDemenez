@@ -1,7 +1,7 @@
 #include "demo.h"
 #include "ConsoleTools.h"
 
-char feuille[FEUILLETAILLEX][FEUILLETAILLEY] = { ' ' };
+char feuille[FEUILLETAILLEX+2][FEUILLETAILLEY+2] = { ' ' };
 
 void selectDirection(Chenille *chenille) {
 	int valeur = rangedRand(0, 4);
@@ -166,6 +166,8 @@ int AvanceChenille(Chenille* chenille) {
 			}
 			//On décale le premier element vers la gauche selon les X
 			chenille->tab[0].X = (chenille->tab[0].X) - 1;
+
+			//Il faut maintenant ordonner le tableau et mettre la tête tout à gauche 
 			
 			return 0;
 		}
@@ -181,6 +183,7 @@ int AvanceChenille(Chenille* chenille) {
 			//Si on mange une pomme alors on augmente la taille de la chenille 
 			if (feuille[posheadX][posheadY] == '@') {
 				TailleAugmente(chenille);
+				//On indique les coord du nouvel element de la chenille
 				chenille->tab[chenille->Size - 1].X = posheadX;
 				chenille->tab[chenille->Size - 1].Y = posheadY;
 				return 0;
@@ -190,12 +193,12 @@ int AvanceChenille(Chenille* chenille) {
 			int Y = chenille->tab[0].Y;
 			moveCursor(X, Y);
 			plotChar(' ');
-			//On décale tous les elements de la chenille à la place de l'element suivant jusqu'à l'avant dernier vers la droite
+			//On décale tous les coord des elements de la chenille à la place de l'element suivant jusqu'à l'avant dernier vers la droite
 			for (int i = 0 ; i < chenille->Size-1; i++) {
 				chenille->tab[i].X = (chenille->tab[i + 1].X);
 				chenille->tab[i].Y = (chenille->tab[i + 1].Y);
 			}
-			//On décale le dernier element de la chenille vers la droite
+			//On décale la coord du dernier element de la chenille vers la droite
 			chenille->tab[chenille->Size-1].X = (chenille->tab[chenille->Size-1].X) + 1;
 			
 			return 0;
@@ -205,5 +208,5 @@ int AvanceChenille(Chenille* chenille) {
 		}
 		break;
 	}
-	
+	return 0;
 }
