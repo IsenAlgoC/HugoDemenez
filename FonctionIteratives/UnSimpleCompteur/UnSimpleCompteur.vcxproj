@@ -24,6 +24,7 @@
     <ProjectGuid>{f68ff77a-072d-49d0-a9c0-f92c60d914f9}</ProjectGuid>
     <RootNamespace>UnSimpleCompteur</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>FonctionsRecursives</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
