@@ -39,7 +39,7 @@ void InitFeuille() {
 		for (int y = 0; y < FEUILLETAILLEY; y++) {
 			moveCursor(x, y);
 			//On met 30 pommes dans la feuille
-			if (rangedRand(0, 25)==1 && nbpomme < 30) {
+			if (rangedRand(0, 25)==1 && nbpomme < 50) {
 				plotChar(POMME);
 				feuille[x][y] = POMME;
 				nbpomme++;

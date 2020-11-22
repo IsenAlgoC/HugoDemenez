@@ -9,8 +9,8 @@
 #define Sleep(n) Sleep(n)
 
 #define console 20
-#define FEUILLETAILLEX 20 // taille de la feuille
-#define FEUILLETAILLEY 20
+#define FEUILLETAILLEX 40 // taille de la feuille
+#define FEUILLETAILLEY 30
 #define CHENILLETAILLEMAX 20 // taille max de la chenille
 #define CHENILLETAILLEINIT 5 // taille initiale de la chenille
 #define POMME '@'
