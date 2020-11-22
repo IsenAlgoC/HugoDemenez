@@ -9,6 +9,5 @@ int main() {
 	printf("\n");
 	recursCompteurIncrement(fin);
 	printf("\n");
-	printf("%d",recursStrLen(&chaine));
-
+	printf("%d",recursStrLen(chaine));
 }
