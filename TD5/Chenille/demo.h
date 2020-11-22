@@ -13,12 +13,17 @@
 #define FEUILLETAILLEY 20
 #define CHENILLETAILLEMAX 20 // taille max de la chenille
 #define CHENILLETAILLEINIT 5 // taille initiale de la chenille
-
+#define POMME '@'
+#define TETE 'O'
+#define CORPS '*'
+#define VIDE ' '
 typedef struct CHENILLE {
 	int Size;
 	char Direction;
 	COORD tab[CHENILLETAILLEMAX];
 }Chenille;
+
+
 
 void DessineChenille(Chenille chenille);
 void selectDirection(Chenille *chenille);

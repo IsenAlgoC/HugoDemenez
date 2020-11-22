@@ -10,14 +10,16 @@ int main(int argc, char* argv[]) {
 	InitFeuille();
 	InitChenille(&Chen);
 	DessineChenille(Chen);
+	
 	while (Chen.Size != CHENILLETAILLEMAX) {
-		Sleep(100);
+		Sleep(50);
 		AvanceChenille(&Chen);
 		DessineChenille(Chen);
 	}
 	
 	// fermeture de la console
-	moveCursor(FEUILLETAILLEX, FEUILLETAILLEY);
+	moveCursor(0, FEUILLETAILLEY+1);
+	printf_s("Votre chenille a atteint sa taille maximale ! Fin du programme, bonne journee !");
 	closeConsole();
  }
 
