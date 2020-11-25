@@ -10,7 +10,7 @@
 #define SQUELET
 /**************************************************************************/
 /* Compléter votre nom ici                                                */
-/*   Nom :                         Prénom :                               */
+/*   Nom :Demenez                         Prénom :Hugo                    */
 /**************************************************************************/
 
 extern bool modif;
@@ -24,12 +24,11 @@ int ajouter_un_contact_dans_rep(Repertoire *rep, Enregistrement enr)
 {
 #ifdef IMPL_TAB
 	// compléter code ici pour tableau
-	int idx;
 
 	if (rep->nb_elts < MAX_ENREG)
 	{
-		
-
+		rep->tab[rep->nb_elts]=enr;
+		rep->nb_elts++;
 	}
 	else {
 		return(ERROR);
@@ -75,14 +74,12 @@ int ajouter_un_contact_dans_rep(Repertoire *rep, Enregistrement enr)
 void supprimer_un_contact_dans_rep(Repertoire *rep, int indice) {
 
 	// compléter code ici pour tableau
-	if (rep->nb_elts >= 1)		/* s'il y a au moins un element ds le tableau */
+	if (rep->nb_elts >= 1 || indice < rep->nb_elts || 0<indice )		/* s'il y a au moins un element ds le tableau */
 	{						/* et que l'indice pointe a l'interieur */
-		
-
-
-
-
-
+		//On décale tous les élements en écrasant les element à l'indice
+		for (int i = indice ; i < rep->nb_elts; i++) {
+			rep->tab[i] = rep->tab[i + 1];
+		}
 		rep->nb_elts -= 1;		/* ds ts les cas, il y a un element en moins */
 		modif = true;
 	}
@@ -119,19 +116,33 @@ void supprimer_un_contact_dans_rep(Repertoire *rep, int indice) {
 void affichage_enreg(Enregistrement enr)
 {
 	// code à compléter ici
-
+	printf_s("%s,%s                 %s\n", enr.nom, enr.prenom, enr.tel);
 
 } /* fin affichage_enreg */
   /**********************************************************************/
   /*  fonction d'affichage d'un enregistrement avec alignement des mots */
   /* pour les listes                                                    */
-  /* ex | Dupont                |Jean                  |0320304050      */
+  /* ex |Dupont                |Jean                  |0320304050      */
   /**********************************************************************/
 void affichage_enreg_frmt(Enregistrement enr)
 {
 	// code à compléter ici
 	// comme fonction affichage_enreg, mais avec présentation alignées des infos
-	
+	printf_s("|%s", enr.nom);
+	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
+	for (unsigned int i = 0; i < 20 - strlen(enr.nom); i++) {
+		printf_s(" ");
+	}
+	printf_s("|%s", enr.prenom);
+	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
+	for (unsigned int i = 0; i < 20 - strlen(enr.prenom); i++) {
+		printf_s(" ");
+	}
+	printf_s("|%s", enr.tel);
+	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
+	for (unsigned int i = 0; i < 20 - strlen(enr.tel); i++) {
+		printf_s(" ");
+	}
 
 } /* fin affichage_enreg */
 
@@ -143,6 +154,10 @@ void affichage_enreg_frmt(Enregistrement enr)
 bool est_sup(Enregistrement enr1, Enregistrement enr2)
 {
 	// code à compléter ici
+	//On teste si enr1 est supérieur à enr2
+	if (_stricmp(enr1.nom, enr2.nom) > 0) {
+		return (true);
+	}
 	
 
 	return(false);
@@ -158,8 +173,19 @@ void trier(Repertoire *rep)
 
 #ifdef IMPL_TAB
 	// ajouter code ici pour tableau
-	
-
+	//On effectue un trie à bulle
+	for (int i = 0; i < rep->nb_elts -1; i++)
+	{
+		for (int j = 0; j < rep->nb_elts - i - 1; j++)
+		{
+			if (est_sup(rep->tab[j], rep->tab[j + 1]))
+			{
+				Enregistrement tempo = rep->tab[j];
+				rep->tab[j] = rep->tab[j + 1];
+				rep->tab[j + 1] = tempo;
+			}
+		}
+	}
 
 	
 #else
@@ -182,26 +208,56 @@ void trier(Repertoire *rep)
   /*   un entier négatif si la recherche est négative				    */
   /**********************************************************************/
 
-int rechercher_nom(Repertoire *rep, char nom[], int ind)
+int rechercher_nom(Repertoire* rep, char nom[], int ind)
 {
-	int i = ind;		    /* position (indice) de début de recherche dans tableau/liste rep */
-	int ind_fin;			/* position (indice) de fin de tableau/liste rep */
+	int i = ind;            /* position (indice) de début de recherche dans tableau/liste rep */
+	
+	int ind_fin = rep->nb_elts - 1;            /* position (indice) de fin de tableau/liste rep */
 
-	char tmp_nom[MAX_NOM];	/* 2 variables temporaires dans lesquelles */
-	char tmp_nom2[MAX_NOM];	/* on place la chaine recherchee et la chaine lue dans le */
-							/* tableau, afin de les convertir en majuscules et les comparer */
-	bool trouve = false;		
+
+
+	char tmp_nom[MAX_NOM];    /* 2 variables temporaires dans lesquelles */
+	char tmp_nom2[MAX_NOM];    /* on place la chaine recherchee et la chaine lue dans le */
+
+	int caractere = 0;
+	strcpy_s(tmp_nom, _countof(tmp_nom), nom);
+	while (tmp_nom[caractere]) {
+		tmp_nom[caractere] = toupper(tmp_nom[caractere]);
+		caractere++;
+	}
+	caractere = 0;
+	bool trouve = false;
+
+
 
 
 #ifdef IMPL_TAB
-							// ajouter code ici pour tableau
-	
+
+	while (trouve == false || i < ind_fin)
+	{
+		strcpy_s(tmp_nom2, _countof(tmp_nom2), rep->tab[ind].nom);
+		while (tmp_nom2[caractere]) {                  
+			tmp_nom2[caractere] = toupper(tmp_nom2[caractere]);
+			caractere++;
+		}
+		caractere = 0;
+		if (strcmp(tmp_nom, tmp_nom2) == 0) {
+			trouve = true;
+		}
+		else
+		{
+			i++;
+		}
+	}
+
 #else
 #ifdef IMPL_LIST
-							// ajouter code ici pour Liste
-	
+	// ajouter code ici pour Liste
+
 #endif
 #endif
+
+
 
 	return((trouve) ? i : -1);
 } /* fin rechercher_nom */
@@ -209,9 +265,19 @@ int rechercher_nom(Repertoire *rep, char nom[], int ind)
   /*********************************************************************/
   /* Supprimer tous les caracteres non numériques de la chaines        */
   /*********************************************************************/
-void compact(char *s)
+void compact(char* s)
 {
 	// compléter code ici
+
+	for (unsigned int i = 0; i < strlen(s); i++) {
+		if (isdigit(s[i]) == false) {
+			//Si ce n'est pas un chiffre alors on décale tous les termes sur la gauche
+			for (unsigned int j = 0; j < strlen(s); j++) {
+				s[j] = s[j + 1];
+			}
+		}
+	}
+
 
 	return;
 }
@@ -221,12 +287,20 @@ void compact(char *s)
 /* argument                                                           */
 /* retourne OK si la sauvegarde a fonctionné ou ERROR sinon           */
 /**********************************************************************/
-int sauvegarder(Repertoire *rep, char nom_fichier[])
+int sauvegarder(Repertoire * rep, char nom_fichier[])
 {
-	FILE *fic_rep;					/* le fichier */
+	FILE* fic_rep;					/* le fichier */
 #ifdef IMPL_TAB
 	// ajouter code ici pour tableau
+	errno_t err;
+	err = fopen_s(&fic_rep, nom_fichier, "w");
+	for (int i = 0; i < rep->nb_elts; i++) {
+		char* buffer = rep->tab->nom[i]+ rep->tab->prenom[i] + rep->tab->tel[i];
+		fputs(buffer, err);
+	}
 	
+
+
 #else
 #ifdef IMPL_LIST
 	// ajouter code ici pour Liste
