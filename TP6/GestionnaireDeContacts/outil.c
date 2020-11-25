@@ -219,13 +219,17 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 	char tmp_nom[MAX_NOM];    /* 2 variables temporaires dans lesquelles */
 	char tmp_nom2[MAX_NOM];    /* on place la chaine recherchee et la chaine lue dans le */
 
-	int caractere = 0;
+	
+	//Copie de nom dans tmp_nom
 	strcpy_s(tmp_nom, _countof(tmp_nom), nom);
+	//Mise en majuscule de tous les caractères 
+	int caractere = 0;
 	while (tmp_nom[caractere]) {
 		tmp_nom[caractere] = toupper(tmp_nom[caractere]);
 		caractere++;
 	}
 	caractere = 0;
+
 	bool trouve = false;
 
 
@@ -235,12 +239,16 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 
 	while (trouve == false || i < ind_fin)
 	{
-		strcpy_s(tmp_nom2, _countof(tmp_nom2), rep->tab[ind].nom);
+		//Copie du nom du repertoire dans tmp_nom2
+		strcpy_s(tmp_nom2, _countof(tmp_nom2), rep->tab[i].nom);
+		//Mise en majuscule de tous les caractères de tmp_nom2
 		while (tmp_nom2[caractere]) {                  
 			tmp_nom2[caractere] = toupper(tmp_nom2[caractere]);
 			caractere++;
 		}
 		caractere = 0;
+
+		//On compare le nom recherché avec le nom trouvé
 		if (strcmp(tmp_nom, tmp_nom2) == 0) {
 			trouve = true;
 		}
