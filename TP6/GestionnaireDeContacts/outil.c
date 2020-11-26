@@ -6,6 +6,7 @@
 #include <locale.h>
 #include "rep.h"
 
+
 #define VERSION 3.0
 #define SQUELET
 /**************************************************************************/
@@ -269,17 +270,19 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 void compact(char* s)
 {
 	// compléter code ici
+	for (int i = 0, j; s[i] != '\0'; ++i) {
+		// Si on n'a pas un chiffre on rentre dans la boucle
+		while (isdigit(s[i])==false) {
+			for (j = i; s[j] != '\0'; ++j) {
 
-	for (unsigned int i = 0; i < strlen(s); i++) {
-		if (isdigit(s[i]) == false) {
-			//Si ce n'est pas un chiffre alors on décale tous les termes sur la gauche
-			for (unsigned int j = 0; j < strlen(s); j++) {
+				// Si le jème element n'est pas un vide
+				// On donne la valeur du jème +1 au jème element
 				s[j] = s[j + 1];
 			}
+			//On retire le jème element
+			s[j] = '\0';
 		}
 	}
-
-
 	return;
 }
 
