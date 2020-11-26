@@ -223,12 +223,8 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 	//Copie de nom dans tmp_nom
 	strcpy_s(tmp_nom, _countof(tmp_nom), nom);
 	//Mise en majuscule de tous les caractères 
-	int caractere = 0;
-	while (tmp_nom[caractere]) {
-		tmp_nom[caractere] = toupper(tmp_nom[caractere]);
-		caractere++;
-	}
-	caractere = 0;
+	_strupr_s(tmp_nom,sizeof(tmp_nom));
+	
 
 	bool trouve = false;
 
@@ -242,11 +238,8 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 		//Copie du nom du repertoire dans tmp_nom2
 		strcpy_s(tmp_nom2, _countof(tmp_nom2), rep->tab[i].nom);
 		//Mise en majuscule de tous les caractères de tmp_nom2
-		while (tmp_nom2[caractere]) {                  
-			tmp_nom2[caractere] = toupper(tmp_nom2[caractere]);
-			caractere++;
-		}
-		caractere = 0;
+		_strupr_s(tmp_nom2,sizeof(tmp_nom2));
+		
 
 		//On compare le nom recherché avec le nom trouvé
 		if (strcmp(tmp_nom, tmp_nom2) == 0) {
