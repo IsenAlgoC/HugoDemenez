@@ -25,13 +25,16 @@ int ajouter_un_contact_dans_rep(Repertoire *rep, Enregistrement enr)
 {
 #ifdef IMPL_TAB
 	// compléter code ici pour tableau
-
+	//On verifie si le repertoire n'est pas rempli au maximum
 	if (rep->nb_elts < MAX_ENREG)
 	{
+		//Si il y a de la place alors on met le nouvel enregistrement à la suite des autres
 		rep->tab[rep->nb_elts]=enr;
+		//On augmente donc le nombre d'element compris dans le repertoire
 		rep->nb_elts++;
 	}
 	else {
+		//On retourne une erreur dans le cas où le registre est plein
 		return(ERROR);
 	}
 
@@ -129,7 +132,7 @@ void affichage_enreg_frmt(Enregistrement enr)
 {
 	// code à compléter ici
 	// comme fonction affichage_enreg, mais avec présentation alignées des infos
-	printf_s("|%s", enr.nom);
+	printf_s("\n|%s", enr.nom);
 	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
 	for (unsigned int i = 0; i < 20 - strlen(enr.nom); i++) {
 		printf_s(" ");
@@ -233,8 +236,8 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 
 
 #ifdef IMPL_TAB
-
-	while (trouve == false || i < ind_fin)
+	
+	while (trouve == false && i <= ind_fin)
 	{
 		//Copie du nom du repertoire dans tmp_nom2
 		strcpy_s(tmp_nom2, _countof(tmp_nom2), rep->tab[i].nom);
@@ -295,13 +298,37 @@ int sauvegarder(Repertoire * rep, char nom_fichier[])
 {
 	FILE* fic_rep;					/* le fichier */
 #ifdef IMPL_TAB
-	// ajouter code ici pour tableau
-	errno_t err;
-	err = fopen_s(&fic_rep, nom_fichier, "w");
+	
+	//Ouverture du fichier d'ecriture, création de ce dernier s'il n'existe pas
+	 errno_t err = fopen_s(&fic_rep, nom_fichier, "w");
+	//Création de la chaîne de caractère buffer
+	char buffer[sizeof(Enregistrement) + 1] = { 0 };
+	//Création de la variable text qui va permettre d'accumuler les différentes parties de l'enregistrement à stocker dans buffer
+	int text=0;
+	//On créé une boucle for pour parcourir tout le répertoire et ainsi enregistrer tous les enregistrements dans buffer
 	for (int i = 0; i < rep->nb_elts; i++) {
-		char* buffer = rep->tab->nom[i]+ rep->tab->prenom[i] + rep->tab->tel[i];
-		fputs(buffer, err);
+		//On ajoute le nom dans buffer
+		text+=sprintf_s(buffer + text, sizeof(buffer),rep->tab[i].nom);
+		//On espace le nom et le prenom
+		text += sprintf_s(buffer + text, sizeof(buffer), ";");
+		//On ajoute le prenom dans buffer
+		text+= sprintf_s(buffer+text, sizeof(buffer), rep->tab[i].prenom);
+		//On espace le prenom et le numero de telephone
+		text += sprintf_s(buffer + text, sizeof(buffer), ";");
+		//On ajoute le numero de telephone dans buffer
+		text += sprintf_s(buffer + text, sizeof(buffer), rep->tab[i].tel);
+		//On ajoute le passage à la ligne entre chaque enregistrement
+		text += sprintf_s(buffer + text, sizeof(buffer), "\n");
 	}
+	//On écrit tout le buffer dans le fichier
+	if (fic_rep != 0) {
+		fputs(buffer, &fic_rep);
+		//fermeture du fichier
+		fclose(&fic_rep);
+	}
+	
+
+	
 	
 
 
