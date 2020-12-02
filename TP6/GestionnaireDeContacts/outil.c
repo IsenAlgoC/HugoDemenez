@@ -132,22 +132,8 @@ void affichage_enreg_frmt(Enregistrement enr)
 {
 	// code à compléter ici
 	// comme fonction affichage_enreg, mais avec présentation alignées des infos
-	printf_s("\n|%s", enr.nom);
-	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
-	for (unsigned int i = 0; i < 20 - strlen(enr.nom); i++) {
-		printf_s(" ");
-	}
-	printf_s("|%s", enr.prenom);
-	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
-	for (unsigned int i = 0; i < 20 - strlen(enr.prenom); i++) {
-		printf_s(" ");
-	}
-	printf_s("|%s", enr.tel);
-	//On ajoute autant d'espace nécessaire pour avoir 20 caractères
-	for (unsigned int i = 0; i < 20 - strlen(enr.tel); i++) {
-		printf_s(" ");
-	}
-
+	printf_s("\n|%-30s|%-30s|%-30s", enr.nom, enr.prenom, enr.tel);
+	
 } /* fin affichage_enreg */
 
 
