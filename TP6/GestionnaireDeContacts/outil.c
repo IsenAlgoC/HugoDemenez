@@ -50,14 +50,56 @@ int ajouter_un_contact_dans_rep(Repertoire *rep, Enregistrement enr)
 			rep->est_trie = true;
 			return(OK);
 		}
-
+		else {
+			return(ERROR);
+		}
 	}
 	else {
-			//
-			// compléter code ici pour Liste
-			//
-			//
-			//
+		//On doit regarder où il faut ajouter l'element par ordre alphabetique
+		//On créé un element CurrentElemListe qui pointe sur l'element actuel du repertoire
+		SingleLinkedListElem *CurrentElemListe = rep->liste->head;
+		//On se place sur la tete en premier lieu
+		int position = 0;
+		//On regarde si notre enregistrement est plus grand que la tete
+		if (est_sup(enr,CurrentElemListe->pers)) {
+			//Tant qu'on est plus grand, on change l'element actuel à comparer et on augmente la position
+			while (est_sup(enr, CurrentElemListe->pers)) {
+				if (CurrentElemListe->next != NULL) {
+					CurrentElemListe = CurrentElemListe->next;
+					position++;
+				}
+				else {
+					//On est arrivé à la fin, il faut donc placer l'enregistrement en queue de repertoire
+					InsertElementAt(rep->liste, rep->nb_elts, enr);
+					rep->nb_elts += 1;
+					modif = true;
+					rep->est_trie = true;
+					return(OK);
+				}
+			}
+			//Si on est sorti de la boucle c'est que l'on est inférieur à l'element regardé, on peut donc prendre sa place
+			if (InsertElementAt(rep->liste, position, enr) != 0) {
+				rep->nb_elts += 1;
+				modif = true;
+				rep->est_trie = true;
+				return(OK);
+			}
+			else {
+				return(ERROR);
+			}
+		}
+		//Enr doit être placé en tete de repertoire
+		else {
+			if (InsertElementAt(rep->liste, 0, enr) != 0) {
+				rep->nb_elts += 1;
+				modif = true;
+				rep->est_trie = true;
+				return(OK);
+			}
+			else {
+				return(ERROR);
+			}
+		}
 
 	}
 
@@ -214,7 +256,8 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 	strcpy_s(tmp_nom, _countof(tmp_nom), nom);
 	//Mise en majuscule de tous les caractères 
 	_strupr_s(tmp_nom,sizeof(tmp_nom));
-	
+	//On initialise l'element sur la tete de la liste
+	SingleLinkedListElem* CurrentElemListe = rep->liste->head;
 
 	bool trouve = false;
 
@@ -243,7 +286,29 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 
 #else
 #ifdef IMPL_LIST
-	// ajouter code ici pour Liste
+	//On créé une variable qui pointe sur l'element où l'on se trouve
+	for (int count = 0; count < i; count++) {
+		CurrentElemListe = CurrentElemListe->next;
+	}
+	
+	while (trouve == false && i <= ind_fin)
+	{
+		//Copie du nom du repertoire dans tmp_nom2
+		strcpy_s(tmp_nom2, _countof(tmp_nom2), CurrentElemListe->pers.nom);
+		//Mise en majuscule de tous les caractères de tmp_nom2
+		_strupr_s(tmp_nom2, sizeof(tmp_nom2));
+
+
+		//On compare le nom recherché avec le nom trouvé
+		if (strcmp(tmp_nom, tmp_nom2) == 0) {
+			trouve = true;
+		}
+		else
+		{	
+			CurrentElemListe = CurrentElemListe->next;
+			i++;
+		}
+	}
 
 #endif
 #endif
@@ -291,7 +356,6 @@ int sauvegarder(Repertoire * rep, char nom_fichier[])
 	//Création de la chaîne de caractère buffer
 	char buffer[sizeof(Enregistrement) + 1] = { ' ' };
 	if (fic_rep != NULL) {
-		//Création de la variable text qui va permettre d'accumuler les différentes parties de l'enregistrement à stocker dans buffer
 		//On créé une boucle for pour parcourir tout le répertoire et ainsi enregistrer tous les enregistrements dans buffer
 		for (int i = 0; i < rep->nb_elts; i++) {
 			//On ajoute le nom dans buffer
@@ -313,7 +377,29 @@ int sauvegarder(Repertoire * rep, char nom_fichier[])
 
 #else
 #ifdef IMPL_LIST
-	// ajouter code ici pour Liste
+	//Ouverture du fichier d'ecriture, création de ce dernier s'il n'existe pas
+	errno_t err = fopen_s(&fic_rep, nom_fichier, "w");
+
+	//Création de la chaîne de caractère buffer
+	char buffer[sizeof(Enregistrement) + 1] = { ' ' };
+	if (fic_rep != NULL) {
+		//On initialise une variable sur le premier element
+		SingleLinkedListElem* CurrentElement = rep->liste->head;
+		//On créé une boucle for pour parcourir tout le répertoire et ainsi enregistrer tous les enregistrements dans buffer
+	
+		for (int i = 0; i < rep->nb_elts; i++) {
+			//On ajoute le nom dans buffer
+			sprintf_s(buffer, _countof(buffer), "%s;%s;%s;\n",CurrentElement->pers.nom, CurrentElement->pers.prenom, CurrentElement->pers.tel);
+			fputs(buffer, fic_rep);
+			CurrentElement = CurrentElement->next;
+		}
+		//fermeture du fichier
+		fclose(fic_rep);
+	}
+
+	else {
+		return (ERROR);
+	}
 #endif
 #endif
 
@@ -332,6 +418,8 @@ int charger(Repertoire *rep, char nom_fichier[])
 	FILE *fic_rep;					/* le fichier */
 	errno_t err;
 	int num_rec = 0;						/* index sur enregistrements */
+
+	
 	int long_max_rec = sizeof(Enregistrement);
 	char buffer[sizeof(Enregistrement) + 1];
 	int idx = 0;
@@ -369,7 +457,18 @@ int charger(Repertoire *rep, char nom_fichier[])
 				}
 #else
 #ifdef IMPL_LIST
-														// ajouter code implemention liste
+				Enregistrement temporaire;
+				if (lire_champ_suivant(buffer, &idx, temporaire.nom, MAX_NOM, SEPARATEUR) == OK)
+				{
+					idx++;							/* on saute le separateur */
+					if (lire_champ_suivant(buffer, &idx, temporaire.prenom, MAX_NOM, SEPARATEUR) == OK)
+					{
+						idx++;
+						if (lire_champ_suivant(buffer, &idx, temporaire.tel, MAX_TEL, SEPARATEUR) == OK)
+							ajouter_un_contact_dans_rep(rep, temporaire);	/* element à priori correct, on le comptabilise */
+							num_rec++;	/* element à priori correct, on le comptabilise */
+					}
+				}
 #endif
 #endif
 
