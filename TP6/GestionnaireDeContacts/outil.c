@@ -300,31 +300,24 @@ int sauvegarder(Repertoire * rep, char nom_fichier[])
 #ifdef IMPL_TAB
 	
 	//Ouverture du fichier d'ecriture, création de ce dernier s'il n'existe pas
-	 errno_t err = fopen_s(&fic_rep, nom_fichier, "w");
+	errno_t err = fopen_s(&fic_rep, nom_fichier, "w");
+
 	//Création de la chaîne de caractère buffer
-	char buffer[sizeof(Enregistrement) + 1] = { 0 };
-	//Création de la variable text qui va permettre d'accumuler les différentes parties de l'enregistrement à stocker dans buffer
-	int text=0;
-	//On créé une boucle for pour parcourir tout le répertoire et ainsi enregistrer tous les enregistrements dans buffer
-	for (int i = 0; i < rep->nb_elts; i++) {
-		//On ajoute le nom dans buffer
-		text+=sprintf_s(buffer + text, sizeof(buffer),rep->tab[i].nom);
-		//On espace le nom et le prenom
-		text += sprintf_s(buffer + text, sizeof(buffer), ";");
-		//On ajoute le prenom dans buffer
-		text+= sprintf_s(buffer+text, sizeof(buffer), rep->tab[i].prenom);
-		//On espace le prenom et le numero de telephone
-		text += sprintf_s(buffer + text, sizeof(buffer), ";");
-		//On ajoute le numero de telephone dans buffer
-		text += sprintf_s(buffer + text, sizeof(buffer), rep->tab[i].tel);
-		//On ajoute le passage à la ligne entre chaque enregistrement
-		text += sprintf_s(buffer + text, sizeof(buffer), "\n");
-	}
-	//On écrit tout le buffer dans le fichier
-	if (fic_rep != 0) {
-		fputs(buffer, &fic_rep);
+	char buffer[sizeof(Enregistrement) + 1] = { ' ' };
+	if (fic_rep != NULL) {
+		//Création de la variable text qui va permettre d'accumuler les différentes parties de l'enregistrement à stocker dans buffer
+		//On créé une boucle for pour parcourir tout le répertoire et ainsi enregistrer tous les enregistrements dans buffer
+		for (int i = 0; i < rep->nb_elts; i++) {
+			//On ajoute le nom dans buffer
+			sprintf_s(buffer, _countof(buffer), "%s;%s;%s;\n", rep->tab[i].nom, rep->tab[i].prenom, rep->tab[i].tel);
+			fputs(buffer, fic_rep);
+		}
 		//fermeture du fichier
-		fclose(&fic_rep);
+		fclose(fic_rep);
+	}
+
+	else {
+		return (ERROR);
 	}
 	
 
