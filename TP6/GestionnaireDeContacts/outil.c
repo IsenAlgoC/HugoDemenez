@@ -256,8 +256,7 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 	strcpy_s(tmp_nom, _countof(tmp_nom), nom);
 	//Mise en majuscule de tous les caractères 
 	_strupr_s(tmp_nom,sizeof(tmp_nom));
-	//On initialise l'element sur la tete de la liste
-	SingleLinkedListElem* CurrentElemListe = rep->liste->head;
+
 
 	bool trouve = false;
 
@@ -286,7 +285,9 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 
 #else
 #ifdef IMPL_LIST
-	//On créé une variable qui pointe sur l'element où l'on se trouve
+	//On initialise l'element sur la tete de la liste
+	SingleLinkedListElem* CurrentElemListe = rep->liste->head;
+	//On va chercher l'element où l'on se trouve
 	for (int count = 0; count < i; count++) {
 		CurrentElemListe = CurrentElemListe->next;
 	}
