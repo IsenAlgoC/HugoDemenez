@@ -57,7 +57,8 @@ int SLLpull(SLLStack* stack, int* value) {
 //On va retourner la valeur du dessus de la pile
 int SLLpeek(SLLStack* stack, int* value) {
 	if (stack != NULL) {
-		return stack->list->tail;
+		*value= stack->list->tail->data;
+		return 1;
 	}
 	return 0;
 }
