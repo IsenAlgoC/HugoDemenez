@@ -206,7 +206,7 @@ int insertElemAtLinkedListTail(LinkedList* Liste, SingleLinkedListElem* elem) {
 			return(0);
 		}
 	}
-	else {
+	else { //Insertion en queue de l'element 
 		if (elem != NULL) {
 			//La queue pointe sur le nouvel element
 			Liste->tail->next = elem;
